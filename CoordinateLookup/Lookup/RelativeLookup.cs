@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CoordinateLookup.Lookup
 {
@@ -20,10 +14,7 @@ namespace CoordinateLookup.Lookup
 
         private void Initialize(IEnumerable<KeyValuePair> items) => _items = new List<KeyValuePair>(items);
 
-        public RelativeLookup(Func<T, float> keySelector)
-        {
-            _keySelector = keySelector;
-        }
+        public RelativeLookup(Func<T, float> keySelector) => _keySelector = keySelector;
 
         public static RelativeLookup<T> Create(IEnumerable<T> items, Func<T, float> keySelector)
         {
@@ -71,10 +62,7 @@ namespace CoordinateLookup.Lookup
                 _keyStartIndex = keyStartIndex;
             }
 
-            public int CompareTo(KeyValuePair other)
-            {
-                return _lookup._keySelector(Value).CompareTo(_lookup._keySelector(other.Value));
-            }
+            public int CompareTo(KeyValuePair other) => _lookup._keySelector(Value).CompareTo(_lookup._keySelector(other.Value));
 
             public override bool Equals(object? obj)
             {

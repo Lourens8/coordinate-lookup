@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CoordinateLookup.Lookup
+﻿namespace CoordinateLookup.Lookup
 {
     public interface IRelativeLookup<T> : IEnumerable<ILookupKeyValuePair<T>>
     {

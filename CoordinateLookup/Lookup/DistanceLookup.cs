@@ -1,12 +1,6 @@
 ﻿using CoordinateLookup.Extensions;
 using CoordinateLookup.Utilities;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CoordinateLookup.Lookup
 {
@@ -58,16 +52,13 @@ namespace CoordinateLookup.Lookup
 
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-            public IEnumerator<T> GetEnumerator()
-            {
-                return Take(1).GetEnumerator();
-            }
+            public IEnumerator<T> GetEnumerator() => Take(1).GetEnumerator();
 
             public IEnumerable<T> Take(int count)
             {
                 var l1 = _lookup._l1[_key.key1];
                 var l2 = _lookup._l2[_key.key2];
-                List<T> match = new List<T>();
+                var match = new List<T>();
 
                 while (match.Count <= count)
                 {
@@ -96,7 +87,7 @@ namespace CoordinateLookup.Lookup
                         }).Where(t => t.distance <= maxDistance).ToList();
 
                         if (measured.Count >= count)
-                            return measured.OrderBy(t=>t.distance).Take(count).Select(t => t.item).ToList();
+                            return measured.OrderBy(t => t.distance).Take(count).Select(t => t.item).ToList();
 
                         match = measured.Select(t => t.item).ToList();
                     }
