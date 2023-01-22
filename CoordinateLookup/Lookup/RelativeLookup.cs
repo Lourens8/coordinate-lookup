@@ -20,8 +20,6 @@ namespace CoordinateLookup.Lookup
         {
             var lookup = new RelativeLookup<T>(keySelector);
 
-            var s = Stopwatch.StartNew();
-
             IEnumerable<KeyValuePair> elements = new List<KeyValuePair>();
             var t1 = Task.Run(() => elements = items
                                                 .AsParallel()
@@ -32,8 +30,6 @@ namespace CoordinateLookup.Lookup
             t1.Wait();
 
             lookup.Initialize(elements);
-
-            s.Stop();
 
             return lookup;
         }

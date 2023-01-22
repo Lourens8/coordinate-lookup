@@ -56,12 +56,14 @@ namespace CoordinateLookup.Lookup
 
             public IEnumerable<T> Take(int count)
             {
+                //1. Find the closest match in both dimensions
                 var l1 = _lookup._l1[_key.key1];
                 var l2 = _lookup._l2[_key.key2];
                 var match = new List<T>();
 
                 while (match.Count <= count)
                 {
+                    //2. Expand the results to a square containing about 1000 results
                     var distance = l1.Next(1000);
                     l2.ExpandTo(distance);
 
@@ -71,8 +73,10 @@ namespace CoordinateLookup.Lookup
                     if (v1.Count > _maxExpansion)
                         break;
 
+                    //3. Find the overlap between the two sets
                     match = v1.Where(t => v2.Contains(t)).ToList();
 
+                    //4. If there are enough matches to continue, reduce the area to a circle
                     if (match.Count > count)
                     {
                         var maxDistance = DistanceUtility.CalculateDistance(l1.Min, _key.key2, _key.key1, _key.key2);
