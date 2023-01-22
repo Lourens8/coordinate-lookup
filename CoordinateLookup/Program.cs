@@ -21,7 +21,7 @@ s.Stop();
 var indexTime = s.ElapsedMilliseconds;
 Console.WriteLine($"Index time : {indexTime} ms");
 
-s.Reset();
+s.Restart();
 
 foreach (var item in TestData.Positions)
 {
